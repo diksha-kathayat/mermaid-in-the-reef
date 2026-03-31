@@ -1,308 +1,292 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mermaid Swim</title>
+    <style>
+        * { box-sizing: border-box; touch-action: none; }
+        body { 
+            margin: 0; background: #001219; 
+            display: flex; justify-content: center; align-items: center; 
+            height: 100vh; width: 100vw; overflow: hidden; font-family: 'Avenir', sans-serif;
+            touch-action: none;
+        }
+        canvas { display: block; touch-action: none; }
+        #ui { 
+            position: absolute; width: 100%; top: 8%; 
+            text-align: center; pointer-events: none; color: white; 
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .score { font-size: 80px; font-weight: 900; text-shadow: 0 5px 15px rgba(0,0,0,0.5); margin: 0; line-height: 1; }
+        .msg-container { margin-top: 180px; }
+        .msg { 
+            font-size: 16px; text-transform: uppercase; letter-spacing: 4px; 
+            background: rgba(255,255,255,0.3); padding: 12px 28px; 
+            border-radius: 50px; backdrop-filter: blur(10px); display: inline-block;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Mermaid Swim&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>* { box-sizing: border-box; touch-action: none; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0; background: #001219;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex; justify-content: center; align-items: center;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 100vh; width: 100vw; overflow: hidden; font-family: 'Avenir', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>touch-action: none;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>canvas { display: block; touch-action: none; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#ui {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: absolute; width: 100%; top: 8%;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center; pointer-events: none; color: white;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex; flex-direction: column; align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.score { font-size: 80px; font-weight: 900; text-shadow: 0 5px 15px rgba(0,0,0,0.5); margin: 0; line-height: 1; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.msg-container { margin-top: 180px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.msg {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px; text-transform: uppercase; letter-spacing: 4px;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255,255,255,0.3); padding: 12px 28px;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50px; backdrop-filter: blur(10px); display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="ui"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="score" id="scoreUI"&gt;0&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="msgContainer" class="msg-container"&gt;&lt;p class="msg"&gt;Tap to Swim!&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;canvas id="gameCanvas"&gt;&lt;/canvas&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const canvas = document.getElementById('gameCanvas');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const ctx = canvas.getContext('2d');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const scoreUI = document.getElementById('scoreUI');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const msgContainer = document.getElementById('msgContainer');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// --- MOBILE LAYOUT ---</p>
-<p class="p1"><span class="Apple-converted-space">        </span>function resize() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>canvas.width = window.innerWidth;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>canvas.height = window.innerHeight;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>window.addEventListener('resize', resize);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>resize();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>let mermaid = { x: 70, y: 0, v: 0, gravity: 0.25, jump: -6, rotation: 0 };</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let pipes = [], bubbles = [], noseBubbles = [], wildlife = [], stones = [];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let score = 0, gameActive = false, dead = false, frame = 0, saturation = 100;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// --- AUDIO ---</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const audioCtx = new (window.AudioContext || window.webkitAudioContext)();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>function playSfx(f, t, d, v) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const o = audioCtx.createOscillator(); const g = audioCtx.createGain();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>o.type = t; o.frequency.setValueAtTime(f, audioCtx.currentTime);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>g.gain.setValueAtTime(v, audioCtx.currentTime);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + d);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + d);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>} catch(e) {}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// --- COMPLEX DRAWING FUNCTIONS ---</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Draws cascading, heavily wavy hair using Bézier curves and dynamic offsets</p>
-<p class="p1"><span class="Apple-converted-space">        </span>function drawHeavilyWavyHair(x, y, op, layerOffset, isFront = false) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.fillStyle = `hsla(158, 70%, 80%, ${op})`; // Mint Green Hair</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.beginPath();</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Generate multiple cascading strands</p>
-<p class="p1"><span class="Apple-converted-space">            </span>for (let strand = 0; strand &lt; 4; strand++) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>let yStart = y - 12 + (strand * 5);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Dynamically offset the hair's movement based on the frame and layer</p>
-<p class="p1"><span class="Apple-converted-space">                </span>let motionOffset = Math.sin((frame + layerOffset + strand*15) * 0.12) * 5;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>let strandLength = 55 + strand * 5;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Hair root/start</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.moveTo(x + (isFront ? 8 : -5), yStart);</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Dynamic flow back (undulation) using a double Bezier curve</p>
-<p class="p1"><span class="Apple-converted-space">                </span>// ctx.bezierCurveTo(CP1x, CP1y, CP2x, CP2y, Ex, Ey)</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.bezierCurveTo(</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>x - (isFront ? 10 : 20), yStart - 5 + motionOffset, // CP1</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>x - 30, yStart + 20 + motionOffset, // CP2</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>x - strandLength, yStart + 5 + motionOffset // End point</p>
-<p class="p1"><span class="Apple-converted-space">                </span>);</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Curl and flow back to root</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.bezierCurveTo(</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>x - 45, yStart + 25 + motionOffset,<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>x - 30, yStart + 5 + motionOffset,<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>x + (isFront ? 8 : -5), yStart // Back to root</p>
-<p class="p1"><span class="Apple-converted-space">                </span>);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.fill();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function drawWildlife(w) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.fillStyle = `rgba(255,255,255,${w.op})`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.beginPath();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if(w.type === 'shark') {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.ellipse(w.x, w.y, 45, 12, 0, 0, Math.PI*2); // Body</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.moveTo(w.x-5, w.y-10); ctx.lineTo(w.x-20, w.y-30); ctx.lineTo(w.x+5, w.y-8); // Top Fin</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.moveTo(w.x-40, w.y); ctx.lineTo(w.x-60, w.y-20); ctx.lineTo(w.x-52, w.y); ctx.lineTo(w.x-60, w.y+20); // Tail</p>
-<p class="p1"><span class="Apple-converted-space">            </span>} else if(w.type === 'turtle') {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.ellipse(w.x, w.y, 22, 18, 0, 0, Math.PI*2); // Shell</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.arc(w.x+28, w.y, 8, 0, Math.PI*2); // Head</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.ellipse(w.x+8, w.y-18, 14, 6, -Math.PI/4, 0, Math.PI*2); // Front Fin</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.ellipse(w.x+8, w.y+18, 14, 6, Math.PI/4, 0, Math.PI*2); // Front Fin</p>
-<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.ellipse(w.x, w.y, 14, 9, 0, 0, Math.PI*2);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.moveTo(w.x-10, w.y); ctx.lineTo(w.x-22, w.y-10); ctx.lineTo(w.x-18, w.y); ctx.lineTo(w.x-22, w.y+10);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.fill();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// --- CORE CORE ---</p>
-<p class="p1"><span class="Apple-converted-space">        </span>function initStones() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>stones = [];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>for(let i=0; i&lt;12; i++) stones.push({ x: Math.random()*canvas.width, y: canvas.height-35-Math.random()*15, r: Math.random()*12+6 });</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function reset() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>mermaid.y = canvas.height / 2; mermaid.v = 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>pipes = []; bubbles = []; noseBubbles = []; wildlife = [];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>score = 0; frame = 0; saturation = 100; dead = false; gameActive = true;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>scoreUI.innerText = "0"; msgContainer.style.display = "none";</p>
-<p class="p1"><span class="Apple-converted-space">            </span>initStones();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (audioCtx.state === 'suspended') audioCtx.resume();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>playSfx(440, 'sine', 0.2, 0.05);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Pre-fill background bubbles</p>
-<p class="p1"><span class="Apple-converted-space">            </span>for(let i=0; i&lt;30; i++) bubbles.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.5+0.5, r: Math.random()*4+1});</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Emit bubbles from her nose when she swims</p>
-<p class="p1"><span class="Apple-converted-space">        </span>function emitNoseBubbles() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Emits 3-5 bubbles</p>
-<p class="p1"><span class="Apple-converted-space">            </span>for(let i=0; i&lt;4; i++) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>noseBubbles.push({</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>x: mermaid.x + 20, // Nose location</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>y: mermaid.y - 12, // Adjusted for head position</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>vx: -3 - Math.random() * 2, vy: -1 - Math.random() * 2, // Drift backwards and upwards</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>r: Math.random() * 2 + 1.5,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>life: 1 // For fade out</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function update() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>frame++;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (dead) { if (saturation &gt; 30) saturation -= 1.5; return; }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (!gameActive) return;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>mermaid.v += mermaid.gravity;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>mermaid.y += mermaid.v;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Familiar Flappy Physics rotation</p>
-<p class="p1"><span class="Apple-converted-space">            </span>mermaid.rotation = Math.min(Math.PI/4, Math.max(-Math.PI/6, mermaid.v * 0.08));</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Background Bubbles</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (frame % 5 === 0) bubbles.push({x: Math.random()*canvas.width, y: canvas.height+20, s: Math.random()*2+1, r: Math.random()*4+1.5});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>bubbles.forEach(b =&gt; b.y -= b.s);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>bubbles = bubbles.filter(b =&gt; b.y &gt; -20);</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Nose Bubbles</p>
-<p class="p1"><span class="Apple-converted-space">            </span>noseBubbles.forEach(nb =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>nb.x += nb.vx; nb.y += nb.vy;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>nb.vy -= 0.1; // Float acceleration</p>
-<p class="p1"><span class="Apple-converted-space">                </span>nb.vx *= 0.98; // Friction</p>
-<p class="p1"><span class="Apple-converted-space">                </span>nb.life -= 0.02; // Fade out</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>noseBubbles = noseBubbles.filter(nb =&gt; nb.y &gt; -20 &amp;&amp; nb.life &gt; 0);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (frame % 280 === 0) wildlife.push({</p>
-<p class="p1"><span class="Apple-converted-space">                </span>x: canvas.width + 100, y: Math.random()*(canvas.height-200)+100,<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>type: ['shark','turtle','fish'][Math.floor(Math.random()*3)],<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>speed: Math.random()*1.2+0.6, op: 0.15</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>wildlife.forEach(w =&gt; w.x -= w.speed);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (frame % 105 === 0) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>let h = Math.random() * (canvas.height - 400) + 100;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>pipes.push({ x: canvas.width, top: h, gap: 195, passed: false });</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>pipes.forEach(p =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>p.x -= 3.3;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (mermaid.x + 35 &gt; p.x &amp;&amp; mermaid.x - 35 &lt; p.x + 65) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (mermaid.y - 18 &lt; p.top || mermaid.y + 18 &gt; p.top + p.gap) {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>dead = true; gameActive = false;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>playSfx(100, 'sawtooth', 0.5, 0.1);</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>msgContainer.style.display = "block";</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (!p.passed &amp;&amp; p.x &lt; mermaid.x) { score++; p.passed = true; scoreUI.innerText = score; playSfx(900, 'sine', 0.2, 0.03); }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (mermaid.y &gt; canvas.height - 85 || mermaid.y &lt; 0) { dead = true; gameActive = false; msgContainer.style.display = "block"; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function draw() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.filter = `saturate(${saturation}%)`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let grad = ctx.createLinearGradient(0,0,0,canvas.height);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>grad.addColorStop(0, "#014f86"); grad.addColorStop(1, "#4cc9f0");</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.fillStyle = grad; ctx.fillRect(0,0,canvas.width, canvas.height);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// BUBBLES (Background)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.fillStyle="rgba(255,255,255,0.22)";</p>
-<p class="p1"><span class="Apple-converted-space">            </span>bubbles.forEach(b =&gt; { ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI*2); ctx.fill(); });</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>wildlife.forEach(w =&gt; drawWildlife(w));</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Pipes (Coral)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>pipes.forEach(p =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = "#ff8a80"; ctx.strokeStyle = "white"; ctx.lineWidth = 4;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.beginPath(); ctx.roundRect(p.x, 0, 65, p.top, [0,0,15,15]); ctx.fill(); ctx.stroke();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.beginPath(); ctx.roundRect(p.x, p.top + p.gap, 65, canvas.height, [15,15,0,0]); ctx.fill(); ctx.stroke();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Sand &amp; Stones</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.fillStyle = "#f3e5ab"; ctx.beginPath(); ctx.moveTo(0, canvas.height);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>for(let i=0; i&lt;=canvas.width; i+=10) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>let wave = Math.sin((i + frame) * 0.02) * 6;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.lineTo(i, canvas.height - 85 + wave);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.lineTo(canvas.width, canvas.height); ctx.fill();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; canvas.width; i += 25) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(i + Math.sin(i)*10, canvas.height - 40, 2, 2);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>stones.forEach(s =&gt; { ctx.fillStyle = "#90a4ae"; ctx.beginPath(); ctx.ellipse(s.x, s.y, s.r, s.r/1.5, Math.PI/4, 0, Math.PI*2); ctx.fill(); });</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (!dead) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.save(); ctx.translate(mermaid.x, mermaid.y); ctx.rotate(mermaid.rotation);</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// --- GIRL MERMAID AESTHETIC ---</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Hair Layer 1 (Back Wavy Hair)</p>
-<p class="p1"><span class="Apple-converted-space">                </span>drawHeavilyWavyHair(0, -10, 1, 0);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Body &amp; CLASSIC FISH TAIL (Gradient Pink -&gt; Teal)</p>
-<p class="p1"><span class="Apple-converted-space">                </span>let tG = ctx.createLinearGradient(-10, 0, -50, 0);<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>tG.addColorStop(0, "#fbcfe8"); // Pink transition</p>
-<p class="p1"><span class="Apple-converted-space">                </span>tG.addColorStop(1, "#2dd4bf"); // Teal main</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = tG;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.beginPath();<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.ellipse(-15, 0, 32, 10, 0, 0, Math.PI*2); // Tapered Body/Tail shape</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.fill();<span class="Apple-converted-space"> </span></p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Classic Detailed Fin (Pink)</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = "#f472b6";<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.beginPath();<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.ellipse(-50, 0, 18, 12, Math.PI/2, 0, Math.PI*2); // Fin shape</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.fill();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Head (Skin rounded Face)</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = "#ffe0bd"; ctx.beginPath(); ctx.arc(10, -5, 11, 0, Math.PI*2); ctx.fill();<span class="Apple-converted-space"> </span></p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Hair Layer 2 (Wavy Hair Strand over face)</p>
-<p class="p1"><span class="Apple-converted-space">                </span>drawHeavilyWavyHair(10, -12, 1, 30, true);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Eyes (Disney Style with Sparkle)</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = "white"; ctx.beginPath(); ctx.arc(16, -7, 5, 0, Math.PI*2); ctx.fill();<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = "black"; ctx.beginPath(); ctx.arc(18, -7, 3, 0, Math.PI*2); ctx.fill();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = "white"; ctx.beginPath(); ctx.arc(19, -8, 1, 0, Math.PI*2); ctx.fill(); // Sparkle</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.restore();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// NOSE BUBBLES (Emitted when swimming - drawn in world space)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.fillStyle="rgba(255,255,255,0.7)";</p>
-<p class="p1"><span class="Apple-converted-space">            </span>noseBubbles.forEach(nb =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ctx.beginPath(); ctx.arc(nb.x, nb.y, nb.r, 0, Math.PI*2); ctx.fill();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>requestAnimationFrame(() =&gt; { update(); draw(); });</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const handleInput = (e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (e.type === 'touchstart') e.preventDefault();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if(!gameActive) reset(); else {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>mermaid.v = mermaid.jump;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>emitNoseBubbles(); // Add Nose Bubbles on Swim</p>
-<p class="p1"><span class="Apple-converted-space">                </span>playSfx(350, 'sine', 0.1, 0.03);<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p1"><span class="Apple-converted-space">        </span>window.addEventListener('mousedown', handleInput);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>window.addEventListener('touchstart', handleInput, {passive: false});</p>
-<p class="p1"><span class="Apple-converted-space">        </span>draw();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <div id="ui">
+        <p class="score" id="scoreUI">0</p>
+        <div id="msgContainer" class="msg-container"><p class="msg">Tap to Swim!</p></div>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreUI = document.getElementById('scoreUI');
+        const msgContainer = document.getElementById('msgContainer');
+
+        // --- MOBILE LAYOUT ---
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        let mermaid = { x: 70, y: 0, v: 0, gravity: 0.25, jump: -6, rotation: 0 };
+        let pipes = [], bubbles = [], noseBubbles = [], wildlife = [], stones = [];
+        let score = 0, gameActive = false, dead = false, frame = 0, saturation = 100;
+
+        // --- AUDIO ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSfx(f, t, d, v) {
+            try {
+                const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                o.type = t; o.frequency.setValueAtTime(f, audioCtx.currentTime);
+                g.gain.setValueAtTime(v, audioCtx.currentTime);
+                g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + d);
+                o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + d);
+            } catch(e) {}
+        }
+
+        // --- COMPLEX DRAWING FUNCTIONS ---
+        // Draws cascading, heavily wavy hair using Bézier curves and dynamic offsets
+        function drawHeavilyWavyHair(x, y, op, layerOffset, isFront = false) {
+            ctx.fillStyle = `hsla(158, 70%, 80%, ${op})`; // Mint Green Hair
+            ctx.beginPath();
+            
+            // Generate multiple cascading strands
+            for (let strand = 0; strand < 4; strand++) {
+                let yStart = y - 12 + (strand * 5);
+                // Dynamically offset the hair's movement based on the frame and layer
+                let motionOffset = Math.sin((frame + layerOffset + strand*15) * 0.12) * 5;
+                let strandLength = 55 + strand * 5;
+                
+                // Hair root/start
+                ctx.moveTo(x + (isFront ? 8 : -5), yStart);
+                
+                // Dynamic flow back (undulation) using a double Bezier curve
+                // ctx.bezierCurveTo(CP1x, CP1y, CP2x, CP2y, Ex, Ey)
+                ctx.bezierCurveTo(
+                    x - (isFront ? 10 : 20), yStart - 5 + motionOffset, // CP1
+                    x - 30, yStart + 20 + motionOffset, // CP2
+                    x - strandLength, yStart + 5 + motionOffset // End point
+                );
+                
+                // Curl and flow back to root
+                ctx.bezierCurveTo(
+                    x - 45, yStart + 25 + motionOffset, 
+                    x - 30, yStart + 5 + motionOffset, 
+                    x + (isFront ? 8 : -5), yStart // Back to root
+                );
+            }
+            ctx.fill();
+        }
+
+        function drawWildlife(w) {
+            ctx.fillStyle = `rgba(255,255,255,${w.op})`;
+            ctx.beginPath();
+            if(w.type === 'shark') {
+                ctx.ellipse(w.x, w.y, 45, 12, 0, 0, Math.PI*2); // Body
+                ctx.moveTo(w.x-5, w.y-10); ctx.lineTo(w.x-20, w.y-30); ctx.lineTo(w.x+5, w.y-8); // Top Fin
+                ctx.moveTo(w.x-40, w.y); ctx.lineTo(w.x-60, w.y-20); ctx.lineTo(w.x-52, w.y); ctx.lineTo(w.x-60, w.y+20); // Tail
+            } else if(w.type === 'turtle') {
+                ctx.ellipse(w.x, w.y, 22, 18, 0, 0, Math.PI*2); // Shell
+                ctx.arc(w.x+28, w.y, 8, 0, Math.PI*2); // Head
+                ctx.ellipse(w.x+8, w.y-18, 14, 6, -Math.PI/4, 0, Math.PI*2); // Front Fin
+                ctx.ellipse(w.x+8, w.y+18, 14, 6, Math.PI/4, 0, Math.PI*2); // Front Fin
+            } else {
+                ctx.ellipse(w.x, w.y, 14, 9, 0, 0, Math.PI*2);
+                ctx.moveTo(w.x-10, w.y); ctx.lineTo(w.x-22, w.y-10); ctx.lineTo(w.x-18, w.y); ctx.lineTo(w.x-22, w.y+10);
+            }
+            ctx.fill();
+        }
+
+        // --- CORE CORE ---
+        function initStones() {
+            stones = [];
+            for(let i=0; i<12; i++) stones.push({ x: Math.random()*canvas.width, y: canvas.height-35-Math.random()*15, r: Math.random()*12+6 });
+        }
+
+        function reset() {
+            mermaid.y = canvas.height / 2; mermaid.v = 0;
+            pipes = []; bubbles = []; noseBubbles = []; wildlife = [];
+            score = 0; frame = 0; saturation = 100; dead = false; gameActive = true;
+            scoreUI.innerText = "0"; msgContainer.style.display = "none";
+            initStones();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            playSfx(440, 'sine', 0.2, 0.05);
+            // Pre-fill background bubbles
+            for(let i=0; i<30; i++) bubbles.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.5+0.5, r: Math.random()*4+1});
+        }
+
+        // Emit bubbles from her nose when she swims
+        function emitNoseBubbles() {
+            // Emits 3-5 bubbles
+            for(let i=0; i<4; i++) {
+                noseBubbles.push({
+                    x: mermaid.x + 20, // Nose location
+                    y: mermaid.y - 12, // Adjusted for head position
+                    vx: -3 - Math.random() * 2, vy: -1 - Math.random() * 2, // Drift backwards and upwards
+                    r: Math.random() * 2 + 1.5,
+                    life: 1 // For fade out
+                });
+            }
+        }
+
+        function update() {
+            frame++;
+            if (dead) { if (saturation > 30) saturation -= 1.5; return; }
+            if (!gameActive) return;
+
+            mermaid.v += mermaid.gravity;
+            mermaid.y += mermaid.v;
+            // Familiar Flappy Physics rotation
+            mermaid.rotation = Math.min(Math.PI/4, Math.max(-Math.PI/6, mermaid.v * 0.08));
+
+            // Background Bubbles
+            if (frame % 5 === 0) bubbles.push({x: Math.random()*canvas.width, y: canvas.height+20, s: Math.random()*2+1, r: Math.random()*4+1.5});
+            bubbles.forEach(b => b.y -= b.s);
+            bubbles = bubbles.filter(b => b.y > -20);
+            
+            // Nose Bubbles
+            noseBubbles.forEach(nb => {
+                nb.x += nb.vx; nb.y += nb.vy;
+                nb.vy -= 0.1; // Float acceleration
+                nb.vx *= 0.98; // Friction
+                nb.life -= 0.02; // Fade out
+            });
+            noseBubbles = noseBubbles.filter(nb => nb.y > -20 && nb.life > 0);
+
+            if (frame % 280 === 0) wildlife.push({
+                x: canvas.width + 100, y: Math.random()*(canvas.height-200)+100, 
+                type: ['shark','turtle','fish'][Math.floor(Math.random()*3)], 
+                speed: Math.random()*1.2+0.6, op: 0.15
+            });
+            wildlife.forEach(w => w.x -= w.speed);
+
+            if (frame % 105 === 0) {
+                let h = Math.random() * (canvas.height - 400) + 100;
+                pipes.push({ x: canvas.width, top: h, gap: 195, passed: false });
+            }
+            pipes.forEach(p => {
+                p.x -= 3.3;
+                if (mermaid.x + 35 > p.x && mermaid.x - 35 < p.x + 65) {
+                    if (mermaid.y - 18 < p.top || mermaid.y + 18 > p.top + p.gap) {
+                        dead = true; gameActive = false;
+                        playSfx(100, 'sawtooth', 0.5, 0.1);
+                        msgContainer.style.display = "block";
+                    }
+                }
+                if (!p.passed && p.x < mermaid.x) { score++; p.passed = true; scoreUI.innerText = score; playSfx(900, 'sine', 0.2, 0.03); }
+            });
+            if (mermaid.y > canvas.height - 85 || mermaid.y < 0) { dead = true; gameActive = false; msgContainer.style.display = "block"; }
+        }
+
+        function draw() {
+            ctx.filter = `saturate(${saturation}%)`;
+            let grad = ctx.createLinearGradient(0,0,0,canvas.height);
+            grad.addColorStop(0, "#014f86"); grad.addColorStop(1, "#4cc9f0");
+            ctx.fillStyle = grad; ctx.fillRect(0,0,canvas.width, canvas.height);
+
+            // BUBBLES (Background)
+            ctx.fillStyle="rgba(255,255,255,0.22)";
+            bubbles.forEach(b => { ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI*2); ctx.fill(); });
+            
+            wildlife.forEach(w => drawWildlife(w));
+
+            // Pipes (Coral)
+            pipes.forEach(p => {
+                ctx.fillStyle = "#ff8a80"; ctx.strokeStyle = "white"; ctx.lineWidth = 4;
+                ctx.beginPath(); ctx.roundRect(p.x, 0, 65, p.top, [0,0,15,15]); ctx.fill(); ctx.stroke();
+                ctx.beginPath(); ctx.roundRect(p.x, p.top + p.gap, 65, canvas.height, [15,15,0,0]); ctx.fill(); ctx.stroke();
+            });
+
+            // Sand & Stones
+            ctx.fillStyle = "#f3e5ab"; ctx.beginPath(); ctx.moveTo(0, canvas.height);
+            for(let i=0; i<=canvas.width; i+=10) {
+                let wave = Math.sin((i + frame) * 0.02) * 6;
+                ctx.lineTo(i, canvas.height - 85 + wave);
+            }
+            ctx.lineTo(canvas.width, canvas.height); ctx.fill();
+
+            for (let i = 0; i < canvas.width; i += 25) {
+                ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(i + Math.sin(i)*10, canvas.height - 40, 2, 2);
+            }
+            stones.forEach(s => { ctx.fillStyle = "#90a4ae"; ctx.beginPath(); ctx.ellipse(s.x, s.y, s.r, s.r/1.5, Math.PI/4, 0, Math.PI*2); ctx.fill(); });
+
+            if (!dead) {
+                ctx.save(); ctx.translate(mermaid.x, mermaid.y); ctx.rotate(mermaid.rotation);
+                
+                // --- GIRL MERMAID AESTHETIC ---
+                
+                // Hair Layer 1 (Back Wavy Hair)
+                drawHeavilyWavyHair(0, -10, 1, 0);
+
+                // Body & CLASSIC FISH TAIL (Gradient Pink -> Teal)
+                let tG = ctx.createLinearGradient(-10, 0, -50, 0); 
+                tG.addColorStop(0, "#fbcfe8"); // Pink transition
+                tG.addColorStop(1, "#2dd4bf"); // Teal main
+                ctx.fillStyle = tG; 
+                ctx.beginPath(); 
+                ctx.ellipse(-15, 0, 32, 10, 0, 0, Math.PI*2); // Tapered Body/Tail shape
+                ctx.fill(); 
+                
+                // Classic Detailed Fin (Pink)
+                ctx.fillStyle = "#f472b6"; 
+                ctx.beginPath(); 
+                ctx.ellipse(-50, 0, 18, 12, Math.PI/2, 0, Math.PI*2); // Fin shape
+                ctx.fill();
+
+                // Head (Skin rounded Face)
+                ctx.fillStyle = "#ffe0bd"; ctx.beginPath(); ctx.arc(10, -5, 11, 0, Math.PI*2); ctx.fill(); 
+                
+                // Hair Layer 2 (Wavy Hair Strand over face)
+                drawHeavilyWavyHair(10, -12, 1, 30, true);
+
+                // Eyes (Disney Style with Sparkle)
+                ctx.fillStyle = "white"; ctx.beginPath(); ctx.arc(16, -7, 5, 0, Math.PI*2); ctx.fill(); 
+                ctx.fillStyle = "black"; ctx.beginPath(); ctx.arc(18, -7, 3, 0, Math.PI*2); ctx.fill();
+                ctx.fillStyle = "white"; ctx.beginPath(); ctx.arc(19, -8, 1, 0, Math.PI*2); ctx.fill(); // Sparkle
+
+                ctx.restore();
+            }
+
+            // NOSE BUBBLES (Emitted when swimming - drawn in world space)
+            ctx.fillStyle="rgba(255,255,255,0.7)";
+            noseBubbles.forEach(nb => {
+                ctx.beginPath(); ctx.arc(nb.x, nb.y, nb.r, 0, Math.PI*2); ctx.fill();
+            });
+
+            requestAnimationFrame(() => { update(); draw(); });
+        }
+
+        const handleInput = (e) => {
+            if (e.type === 'touchstart') e.preventDefault();
+            if(!gameActive) reset(); else { 
+                mermaid.v = mermaid.jump; 
+                emitNoseBubbles(); // Add Nose Bubbles on Swim
+                playSfx(350, 'sine', 0.1, 0.03); 
+            }
+        };
+        window.addEventListener('mousedown', handleInput);
+        window.addEventListener('touchstart', handleInput, {passive: false});
+        draw();
+    </script>
 </body>
 </html>
